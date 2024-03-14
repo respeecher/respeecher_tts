@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "respeecher-tts"
+version = "1.0.0"
+description = "Python API for Respeecher TTS"
+authors = ["Respeecher"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+numpy = "^1.26.4"
+librosa = "^0.10.1"
+soundfile = "^0.12.1"
+pydantic = "^2.6.3"
+
+
+[tool.poetry.group.dev.dependencies]
+ipdb = "^0.13.13"
+mypy = "^1.9.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
