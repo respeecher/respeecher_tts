@@ -11,8 +11,17 @@ The official Python API client for [Respeecher](https://www.respeecher.com/) TTS
 
 Respeecher Python TTS API client requires Python 3.11 or higher.
 
-```
+```bash
 pip install .
+```
+
+### Poetry 
+
+Respeecher Python TTS API client recommends Poetry 1.7.11 or higher.
+
+```bash
+poetry shell
+poetry install
 ```
 
 ## Usage example
