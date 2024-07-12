@@ -45,21 +45,26 @@ class RespeecherTTS:
 
     @cache
     def _lookup_voice_and_ns(
-        self, voice_name: str, narration_style_name: str | None = None
+        self, voice_name: str, narration_style_tags: tuple[str] | None = None
     ) -> tuple[str, str]:
         voice = next((v for v in self.voices if v.name == voice_name), None)
         if not voice:
             raise ValueError(f"Voice {voice_name} not found")
 
-        if narration_style_name:
-            narration_style = next(
-                (
-                    ns
-                    for ns in voice.narration_styles
-                    if ns.info.name == narration_style_name
-                ),
-                None,
-            )
+        if narration_style_tags:
+            # search for the narration style that has the most tags in common
+            # with narration_style_tags
+            best_match = 0
+            narration_style = None
+            for ns in voice.narration_styles:
+                voice_tags = [t.name for t in ns.tags]
+                matches = len([t for t in voice_tags if t in narration_style_tags])
+                if matches != len(narration_style_tags):
+                    continue
+                match_percentage = matches / len(voice_tags) if matches else 0
+                if match_percentage > best_match:
+                    best_match = match_percentage
+                    narration_style = ns
         else:
             narration_style = next(
                 (ns for ns in voice.narration_styles if ns.is_default), None
@@ -122,15 +127,14 @@ class RespeecherTTS:
         self,
         text: str,
         voice: str,
-        narration_style: str | None = None,
+        narration_style_tags: tuple[str] | None = None,
         project_name: str | None = None,
         folder_name: str | None = None,
         return_direct_link: bool = False,
     ) -> str | tuple[np.ndarray, int]:
         project = self._get_project(project_name)
         folder = self._get_folder(project.id, folder_name)
-
-        voice_id, narration_style_id = self._lookup_voice_and_ns(voice, narration_style)
+        voice_id, narration_style_id = self._lookup_voice_and_ns(voice, narration_style_tags)
         original = self.client.create_original(folder.id, text)
         order = self.client.conversion_order(original.id, voice_id, narration_style_id)
         conversion = self._wait_for_conversion(order.conversion_id, self.timeout)

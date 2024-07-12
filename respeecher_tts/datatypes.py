@@ -18,14 +18,14 @@ class Pagination(BaseModel):
     offset: int
 
 
-class NarrationStyleInfo(BaseModel):
+class NarrationStyleTag(BaseModel):
     name: str
 
 
 class NarrationStyle(BaseModel):
     id: str
     is_default: bool
-    info: NarrationStyleInfo
+    tags: list[NarrationStyleTag]
 
 
 class Voice(BaseModel):
