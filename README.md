@@ -27,7 +27,7 @@ poetry install
 ## Usage example
 
 ```python
-from tts_api import RespeecherTTS
+from respeecher_tts import RespeecherTTS
 import soundfile as sf
 
 tts = RespeecherTTS(api_key="<Respeecher_API_Token>", verbose=True)
