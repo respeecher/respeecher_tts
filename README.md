@@ -35,13 +35,13 @@ tts = RespeecherTTS(api_key="<Respeecher_API_Token>", verbose=True)
 print("All Voices:", [voice.name for voice in tts.voices])
 print(
     f"Narration Styles for {tts.voices[0].name} voice:",
-    [narration_style.tags for narration_style in tts.voices[0].narration_styles],
+    [narration_style.name for narration_style in tts.voices[0].narration_styles],
 )
 
 au, sr = tts.synthesize(
     "In the quiet morning, the gentle breeze whispered through the leaves, bringing with it the promise of a new day.",
     voice="Roman",
-    narration_style_tags=("Neutral","Raspy"),
+    narration_style="Mellow, Raspy, Neutral",
 )
 
 sf.write("tts_sample.wav", au, sr)

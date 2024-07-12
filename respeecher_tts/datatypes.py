@@ -26,6 +26,7 @@ class NarrationStyle(BaseModel):
     id: str
     is_default: bool
     tags: list[NarrationStyleTag]
+    name: str | None = None
 
 
 class Voice(BaseModel):
