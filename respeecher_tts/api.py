@@ -125,7 +125,7 @@ class RespeecherTTS:
         self,
         text: str,
         voice: str,
-        narration_style: tuple[str] | None = None,
+        narration_style: str | None = None,
         project_name: str | None = None,
         folder_name: str | None = None,
         return_direct_link: bool = False,
