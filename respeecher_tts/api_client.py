@@ -39,7 +39,11 @@ class RespeecherApiClient:
             },
         )
         result.raise_for_status()
-        return VoiceListResponse.model_validate(result.json())
+        voices = VoiceListResponse.model_validate(result.json())
+        for v in voices.list:
+            for ns in v.narration_styles:
+                ns.name = ", ".join([t.name for t in ns.tags])
+        return voices
 
     def project_list(
         self, offset: int = 0, owner: str | None = None
