@@ -44,5 +44,6 @@ au, sr = tts.synthesize(
     narration_style="Neutral",
 )
 
-sf.write("tts_sample.wav", au, sr)
+# sf.write will reduce the bit depth to 16-bit by default, to avoid this we specify 'PCM_24'
+sf.write("tts_sample.wav", au, sr, 'PCM_24')
 ```
