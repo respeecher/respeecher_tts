@@ -56,7 +56,7 @@ class RespeecherTTS:
                 (
                     ns
                     for ns in voice.narration_styles
-                    if ns.info.name == narration_style_name
+                    if ns.name == narration_style_name
                 ),
                 None,
             )
@@ -66,6 +66,9 @@ class RespeecherTTS:
             )
         if not narration_style:
             raise ValueError(f"Narration style for voice {voice_name} not found")
+
+        if self.verbose:
+            print(f"Selected narration style: {narration_style}")
         return voice.id, narration_style.id
 
     @cache
@@ -129,7 +132,6 @@ class RespeecherTTS:
     ) -> str | tuple[np.ndarray, int]:
         project = self._get_project(project_name)
         folder = self._get_folder(project.id, folder_name)
-
         voice_id, narration_style_id = self._lookup_voice_and_ns(voice, narration_style)
         original = self.client.create_original(folder.id, text)
         order = self.client.conversion_order(original.id, voice_id, narration_style_id)
