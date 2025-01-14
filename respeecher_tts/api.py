@@ -129,11 +129,12 @@ class RespeecherTTS:
         project_name: str | None = None,
         folder_name: str | None = None,
         return_direct_link: bool = False,
+        language: str = "en",
     ) -> str | tuple[np.ndarray, int]:
         project = self._get_project(project_name)
         folder = self._get_folder(project.id, folder_name)
         voice_id, narration_style_id = self._lookup_voice_and_ns(voice, narration_style)
-        original = self.client.create_original(folder.id, text)
+        original = self.client.create_original(folder.id, text, language)
         order = self.client.conversion_order(original.id, voice_id, narration_style_id)
         conversion = self._wait_for_conversion(order.conversion_id, self.timeout)
         if return_direct_link:

@@ -86,10 +86,10 @@ class RespeecherApiClient:
         result.raise_for_status()
         return Folder.model_validate(result.json())
 
-    def create_original(self, folder_id: str, text: str) -> Recording:
+    def create_original(self, folder_id: str, text: str, language: str) -> Recording:
         result = self.session.post(
             f"{self.domain}/api/v2/recordings/tts",
-            json={"parent_folder_id": folder_id, "text": text},
+            json={"parent_folder_id": folder_id, "text": text, "text_language": language},
         )
         result.raise_for_status()
         return Recording.model_validate(result.json())
