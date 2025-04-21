@@ -1,6 +1,6 @@
-# Respeecher Python TTS API client
+# Marketplace Python TTS API client
 
-The official Python API client for [Respeecher](https://www.respeecher.com/) TTS. Respeecher provides Hollywood-quality speech-to-speech and text-to-speech AI voices to businesses and various types of content creators.
+The official Python API client for [Respeecher Marketplace](https://marketplace.respeecher.com/) TTS.
 
 ## TTS Docs
 
@@ -9,7 +9,7 @@ The official Python API client for [Respeecher](https://www.respeecher.com/) TTS
 
 ## Installation
 
-Respeecher Python TTS API client requires Python 3.11 or higher.
+Marketplace Python TTS API client requires Python 3.11 or higher.
 
 ```bash
 pip install .
@@ -17,7 +17,7 @@ pip install .
 
 ### Poetry 
 
-Respeecher Python TTS API client recommends Poetry 1.7.11 or higher.
+Marketplace Python TTS API client recommends Poetry 1.7.11 or higher.
 
 ```bash
 poetry shell
